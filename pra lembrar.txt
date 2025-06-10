@@ -1,0 +1,7 @@
+Se precisar criar algo novo usando a classe Sequelize (ex: operadores, tipos de dados especiais, etc.), pode usar db.Sequelize.
+Para fazer consultas, sincronizar o banco, usar transações, etc., usa db.sequelize.
+
+Usuário 1:N Pedidos → Um usuário pode ter vários pedidos.
+Produto N:1 Categoria → Um produto pertence a uma categoria.
+Pedido N:N Produtos → Um pedido pode ter vários produtos e um 
+produto pode estar em vários pedidos 
