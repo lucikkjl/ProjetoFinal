@@ -2,10 +2,6 @@ const dbConfig = require('../config/dbConfig.js');
 
 const { Sequelize, DataTypes } = require('sequelize');
 
-const user = await User.findByPk(1);
-const pedidos = await user.getPedidos();
-console.log(pedidos);
-
 const sequelize = new Sequelize(
     dbConfig.DB,
     dbConfig.USER,
@@ -34,7 +30,7 @@ sequelize.authenticate()
 
 const db = {}
 
-db.Sequelize = Sequelize; //classe principal do sequelize, onstrutor/objeto da biblioteca 
+db.Sequelize = Sequelize; //classe principal do sequelize, construtor/objeto da biblioteca 
                           //permite criar conexões, definir modelos
 db.sequelize = sequelize; // conexão ativa com o seu banco, executa as queries, sincroniza modelos
 

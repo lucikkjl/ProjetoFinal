@@ -2,7 +2,7 @@ const db = require("../models");
 
 //create main model
 
-const Product = db.products;
+const Product = db.product;
 
 //main work
 
@@ -18,7 +18,7 @@ const addProduct = async (req, res) => {
 
   const product = await Product.create(info);
   res.status(200).send(product);
-  console.log(product);
+  console.log(product.get({ plain: true }));
 
 };
 
@@ -28,6 +28,8 @@ const getAllProducts = async (req, res) => {
 
     let products = await Product.findAll({});
     res.status(200).send(products);
+    products.forEach(p => console.log(p.get({ plain: true })));
+
 }
 
 //get single product by id
@@ -35,8 +37,10 @@ const getAllProducts = async (req, res) => {
 const getOneProduct = async (req, res) => {
 
     let id = req.params.id;
-    let product = await Product.findOne({ where: { id: id } });
+    let product = await Product.findOne({ where: { idProduct: id } });
     res.status(200).send(product);
+    if (product) console.log(product.get({ plain: true }));
+
 }
 
 //update product 
@@ -44,8 +48,9 @@ const getOneProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
 
     let id = req.params.id;
-    const product = await Product.update(req.body, {where: { id: id }});
+    const product = await Product.update(req.body, {where: { idProduct: id }});
     res.status(200).send(product);
+
 }
 
 //delete product

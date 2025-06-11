@@ -14,6 +14,18 @@ app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
 
+//routes
+
+const categoryRouter = require('./routes/categoryRouter.js');
+const orderRouter = require('./routes/orderRouter.js'); 
+const productRouter = require('./routes/productRouter.js')
+const userRouter = require('./routes/userRouter.js');
+
+app.use('/api/categories', categoryRouter);
+app.use('/api/orders', orderRouter);
+app.use('/api/products', productRouter)
+app.use('/api/users', userRouter);  
+
 //testing api
 
 app.get('/', (req, res) => {

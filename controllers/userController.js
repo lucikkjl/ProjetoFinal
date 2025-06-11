@@ -2,7 +2,7 @@ const db = require("../models");
 
 //create main model
 
-const User = db.users;
+const User = db.user;
 
 //main work
 
@@ -18,7 +18,7 @@ const addUser = async (req, res) => {
 
   const user = await User.create(info);
   res.status(200).send(user);
-  console.log(user);
+  console.log(user.get({ plain: true }));
 
 };
 
@@ -28,6 +28,8 @@ const getAllUsers = async (req, res) => {
 
     let users = await User.findAll({});
     res.status(200).send(users);
+    users.forEach(u => console.log(u.get({ plain: true })));
+
 }
 
 //get single user by id
@@ -35,8 +37,10 @@ const getAllUsers = async (req, res) => {
 const getOneUser = async (req, res) => {
 
     let id = req.params.id;
-    let user = await User.findOne({ where: { id: id } });
+    let user = await User.findOne({ where: { idUser: id } });
     res.status(200).send(user);
+    if (user) console.log(user.get({ plain: true }));
+
 }
 
 //update user
@@ -44,7 +48,7 @@ const getOneUser = async (req, res) => {
 const updateUser = async (req, res) => {
 
     let id = req.params.id;
-    const user = await User.update(req.body, {where: { id: id }});
+    const user = await User.update(req.body, {where: { idUser: id }});
     res.status(200).send(user);
 }
 

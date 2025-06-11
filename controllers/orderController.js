@@ -2,7 +2,7 @@ const db = require("../models");
 
 //create main model
 
-const Order = db.orders;
+const Order = db.order;
 
 //main work
 
@@ -16,7 +16,7 @@ const addOrder = async (req, res) => {
 
   const order = await Order.create(info);
   res.status(200).send(order);
-  console.log(order);
+  console.log(order.get({ plain: true }));
 
 };
 
@@ -26,6 +26,8 @@ const getAllOrders = async (req, res) => {
 
     let orders = await Order.findAll({});
     res.status(200).send(orders);
+    orders.forEach(o => console.log(o.get({ plain: true })));
+
 }
 
 //get single order by id
@@ -33,8 +35,10 @@ const getAllOrders = async (req, res) => {
 const getOneOrder = async (req, res) => {
 
     let id = req.params.id;
-    let order = await Order.findOne({ where: { id: id } });
+    let order = await Order.findOne({ where: { idOrder: id } });
     res.status(200).send(order);
+    if (order) console.log(order.get({ plain: true }));
+
 }
 
 //update order 
@@ -42,8 +46,9 @@ const getOneOrder = async (req, res) => {
 const updateOrder = async (req, res) => {
 
     let id = req.params.id;
-    const order = await Order.update(req.body, {where: { id: id }});
+    const order = await Order.update(req.body, {where: { idOrder: id }});
     res.status(200).send(order);
+
 }
 
 //delete order
