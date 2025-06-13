@@ -20,11 +20,13 @@ const categoryRouter = require('./routes/categoryRouter.js');
 const orderRouter = require('./routes/orderRouter.js'); 
 const productRouter = require('./routes/productRouter.js')
 const userRouter = require('./routes/userRouter.js');
+const orderItemsRouter = require('./routes/orderItemsRouter.js');
 
 app.use('/api/categories', categoryRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/products', productRouter)
 app.use('/api/users', userRouter);  
+app.use('/api/orderItems', orderItemsRouter);
 
 //testing api
 

@@ -62,10 +62,25 @@ const deleteProduct = async (req, res) => {
     res.status(200).send("Product deleted successfully");
 }
 
+const getProductsWithCategory = async (req, res) => {
+  try {
+    const products = await db.product.findAll({
+      include: [{
+        model: db.category,
+        as: 'category'
+      }]
+    });
+    res.status(200).send(products);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
 module.exports = {
     addProduct,
     getAllProducts,
     getOneProduct,
     updateProduct,
     deleteProduct,
+    getProductsWithCategory
 };

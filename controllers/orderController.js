@@ -60,10 +60,44 @@ const deleteOrder = async (req, res) => {
     res.status(200).send("Order deleted successfully");
 }
 
+const getAllOrdersWithProducts = async (req, res) => {
+  try {
+    const orders = await Order.findAll({
+      include: {
+        model: Product,
+        as: 'products',
+        through: { attributes: [] }
+      }
+    });
+    res.status(200).send(orders);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
+const getOrderWithProductsAndUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const order = await db.order.findOne({
+      where: { idOrder: id },
+      include: [
+        { model: db.product, as: 'products', through: { attributes: [] } },
+        { model: db.user, as: 'user' }
+      ]
+    });
+    if (!order) return res.status(404).send({ message: 'Order not found' });
+    res.status(200).send(order);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
 module.exports = {
     addOrder,
     getAllOrders,
     getOneOrder,
     updateOrder,
-    deleteOrder
-};
+    deleteOrder,
+    getAllOrdersWithProducts,
+    getOrderWithProductsAndUser
+}

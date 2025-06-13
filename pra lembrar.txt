@@ -1,11 +1,9 @@
 Se precisar criar algo novo usando a classe Sequelize (ex: operadores, tipos de dados especiais, etc.), pode usar db.Sequelize.
 Para fazer consultas, sincronizar o banco, usar transações, etc., usa db.sequelize.
 
-Usuário 1:N Pedidos → Um usuário pode ter vários pedidos.
-Produto N:1 Categoria → Um produto pertence a uma categoria.
-Pedido N:N Produtos → Um pedido pode ter vários produtos e um 
-produto pode estar em vários pedidos 
-
+Usuário 1:N Pedidos 
+Produto N:1 Categoria 
+ produtcs belongs to many orders
 
 
 
@@ -131,4 +129,3 @@ A documentação pode ser criada com `swagger-jsdoc` e `swagger-ui-express` ou, 
 Será utilizado o Swagger e Postman para testes. Serão realizados testes básicos de CRUD e também casos de erro.
 
 Será desenvolvido um tester automático para validar as rotas.
-Meu trabalho

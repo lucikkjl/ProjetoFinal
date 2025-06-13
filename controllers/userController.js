@@ -61,10 +61,28 @@ const deleteUser = async (req, res) => {
     res.status(200).send("User deleted successfully");
 }
 
+// 1:N
+
+const getUserOrders = async (req, res) => {
+
+  try {
+    const users = await db.user.findAll({
+      include: [{
+        model: db.order,
+        as: 'orders'
+      }]
+    });
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
 module.exports = {
     addUser,
     getAllUsers,
     getOneUser,
     updateUser,
-    deleteUser
-};
+    deleteUser,
+    getUserOrders
+}

@@ -60,10 +60,25 @@ const deleteCategory = async (req, res) => {
     res.status(200).send("Category deleted successfully");
 }
 
+const getCategoriesWithProducts = async (req, res) => {
+  try {
+    const categories = await db.category.findAll({
+      include: [{
+        model: db.product,
+        as: 'products'
+      }]
+    });
+    res.status(200).send(categories);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};
+
 module.exports = {
     addCategory,
     getAllCategories,
     getOneCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    getCategoriesWithProducts
 };

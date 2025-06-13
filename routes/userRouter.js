@@ -4,6 +4,7 @@ const router = require('express').Router();
 
 router.post('/addUser', userController.addUser);
 router.get('/allUsers', userController.getAllUsers);
+router.get('/orders', userController.getUserOrders);
 
 router.get('/:id', userController.getOneUser);
 router.put('/:id', userController.updateUser);
