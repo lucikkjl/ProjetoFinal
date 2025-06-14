@@ -61,7 +61,6 @@ db.product.belongsToMany(db.order, {
 });
 
 // 1:N user e order
-
 db.user.hasMany(db.order, {
     foreignKey: 'idUser',
     as: 'orders'
@@ -73,7 +72,6 @@ db.order.belongsTo(db.user, {
 })
 
 // 1:N category e product
-
 db.category.hasMany(db.product, {
   foreignKey: 'idCategory',
   as: 'products'

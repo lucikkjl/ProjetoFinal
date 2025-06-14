@@ -1,0 +1,27 @@
+# node modules
+node_modules/
+
+# logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# diretório de build
+dist/
+build/
+
+# arquivo de variáveis de ambiente
+.env
+
+# arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# pastas do editor (VSCode, etc)
+.vscode/
+.idea/
+
+# outras configurações específicas do sistema
+*.swp

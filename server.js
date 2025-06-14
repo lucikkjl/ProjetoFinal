@@ -1,5 +1,14 @@
 const express = require('express')
 const cors = require('cors')
+const User = require('./models/userModel.js') 
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+
+require('dotenv').config();
+
+const secret = process.env.JWT_SECRET;
+const port = process.env.PORT || 8080; 
+
 
 const app = express()
 
@@ -34,15 +43,10 @@ app.get('/', (req, res) => {
     res.json({ message: 'Welcome to the server!' })
 })
 
-//port
-
-const PORT = process.env.PORT || 3001
-
 //server
 
-app.listen
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)
-})
 

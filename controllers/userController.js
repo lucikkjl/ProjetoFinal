@@ -1,4 +1,6 @@
+const bcrypt = require('bcryptjs');
 const db = require("../models");
+const jwt = require('jsonwebtoken');
 
 //create main model
 
@@ -6,21 +8,94 @@ const User = db.user;
 
 //main work
 
-// create a user
-
 const addUser = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
 
-  let info = {
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-  };
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  const user = await User.create(info);
-  res.status(200).send(user);
-  console.log(user.get({ plain: true }));
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword
+    });
 
+    console.log(user.get({ plain: true }));
+    res.status(201).json({
+      message: "User registered successfully",
+      user: user.get({ plain: true })
+    });
+
+  } catch (error) {
+    console.error("Error registering user:", error);
+    res.status(500).send({ error: error.message });
+  }
 };
+
+//login user
+
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(404).send("Invalid Credentials!");
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return res.status(400).send("Invalid Credentials!");
+    }
+
+    const token = jwt.sign({ idUser: user.idUser }, process.env.JWT_SECRET, {
+       expiresIn: '1h' }
+    );
+
+    res.json({token })
+
+  } catch (error) {
+    console.error("Error logging in:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
+//middleware to verify jwt token
+const verifyToken = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: "Acess Denied" });
+  }
+
+  try {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      if (err) {
+        return res.status(401).json({ message: "Invalid Token" });
+      }
+      req.user = user;
+      next();
+    });
+  } catch (error) {
+    console.error("Error verifying token:", error);
+    res.status(401).json({ message: "Invalid Token" });
+  }
+};
+
+//protected route to get user info
+const getUserInfo = async (req, res) => {
+  try {
+    const user = await User.findOne({ where: { idUser: req.user.idUser } });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user.get({ plain: true }));
+  } catch (error) {
+    console.error("Error fetching user info:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+}
 
 // get all users
 
@@ -80,6 +155,9 @@ const getUserOrders = async (req, res) => {
 
 module.exports = {
     addUser,
+    loginUser,
+    verifyToken,
+    getUserInfo,
     getAllUsers,
     getOneUser,
     updateUser,
