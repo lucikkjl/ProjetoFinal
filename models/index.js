@@ -40,49 +40,48 @@ db.product = require('./productModel.js')(sequelize, DataTypes);
 db.order = require('./orderModel.js')(sequelize, DataTypes);
 db.orderItems = require('./orderItems.js')(sequelize, DataTypes);
 
-db.sequelize.sync({ force: true })
+db.sequelize.sync({ force: false })
     .then(() => {
-        console.log('Banco recriado, tabelas apagadas e criadas novamente');
+        console.log('The database has been synchronized successfully.');
 });
 
 // N:N order and product
 db.order.belongsToMany(db.product, {
   through: db.orderItems,
-  foreignKey: 'orderId',
-  otherKey: 'productId',
+  foreignKey: 'idOrder',
+  otherKey: 'idProduct',
   as: 'products'
 });
 
 db.product.belongsToMany(db.order, {
   through: db.orderItems,
-  foreignKey: 'productId',
-  otherKey: 'orderId',
+  foreignKey: 'idProduct',
+  otherKey: 'idOrder',
   as: 'orders'
 });
 
 // 1:N user e order
 
 db.user.hasMany(db.order, {
-    foreignKey: 'userId',
+    foreignKey: 'idUser',
     as: 'orders'
 })
 
 db.order.belongsTo(db.user, {
-    foreignKey: 'userId',
+    foreignKey: 'idUser',
     as: 'user'
 })
 
 // 1:N category e product
 
 db.category.hasMany(db.product, {
-  foreignKey: 'categoryId',
+  foreignKey: 'idCategory',
   as: 'products'
 });
 
 db.product.belongsTo(db.category, {
-  foreignKey: 'categoryId',
+  foreignKey: 'idCategory',
   as: 'category'
 });
-
 
 module.exports = db;

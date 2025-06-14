@@ -3,6 +3,7 @@ const db = require("../models");
 //create main model
 
 const Order = db.order;
+const Product = db.product;
 
 //main work
 
@@ -11,7 +12,7 @@ const Order = db.order;
 const addOrder = async (req, res) => {
 
   let info = {
-    userId: req.body.userId,
+    idUser: req.body.idUser,
   };
 
   const order = await Order.create(info);

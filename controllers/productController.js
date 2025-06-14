@@ -13,13 +13,12 @@ const addProduct = async (req, res) => {
   let info = {
     name: req.body.name,
     price: req.body.price,
-    categoryId: req.body.categoryId,
+    idCategory: req.body.idCategory,
   };
 
   const product = await Product.create(info);
   res.status(200).send(product);
   console.log(product.get({ plain: true }));
-
 };
 
 // get all products

@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.FLOAT,
             allowNull: false
         },
-        categoryId: {
+        idCategory: {
             type: DataTypes.INTEGER,
             allowNull: false
         },

@@ -5,8 +5,8 @@ const OrderItem = db.orderItems;
 const addOrderItem = async (req, res) => {
 
   let info = {
-    orderId: req.body.orderId,
-    productId: req.body.productId,
+    idOrder: req.body.idOrder,
+    idProduct: req.body.idProduct,
   };
 
   const item = await OrderItem.create(info);

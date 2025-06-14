@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 
 //port
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 3001
 
 //server
 

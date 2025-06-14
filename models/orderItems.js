@@ -7,7 +7,7 @@ const orderItems = sequelize.define('orderItems', {
         autoIncrement: true,
         allowNull: false
     },
-    orderId: {                
+    idOrder: {                
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -15,7 +15,7 @@ const orderItems = sequelize.define('orderItems', {
             key: 'idOrder'
         }
     },
-    productId: {              
+    idProduct: {              
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
