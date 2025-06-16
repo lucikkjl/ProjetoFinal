@@ -14,9 +14,19 @@ const options = {
         url: 'http://localhost:8080/api',
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: { // o nome usado nos endpoints: security: [ { bearerAuth: [] } ]
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
   },
-  apis: ['./routes/*.js'], 
+  apis: ['./routes/*.js'], // ou o caminho onde estão suas rotas
 };
+
 const swaggerSpec = swaggerJSDoc(options);
 
 function swaggerDocs(app) {
@@ -24,4 +34,3 @@ function swaggerDocs(app) {
 }
 
 module.exports = swaggerDocs;
-

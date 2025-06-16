@@ -1,7 +1,6 @@
-const express = require('express')
+const express = require('express');
 const userController = require("../controllers/userController");
-const { verifyToken } = userController;
-
+const verifyToken = require('../middleware/verifyToken');
 const router = require("express").Router();
 
 /**
@@ -85,11 +84,15 @@ router.get('/me', verifyToken, userController.getUserInfo);
  *   get:
  *     summary: Get all users
  *     tags: [users]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: List of users
+ *       401:
+ *         description: Unauthorized
  */
-router.get('/allUsers', userController.getAllUsers);
+router.get('/allUsers', verifyToken, userController.getAllUsers);
 
 /**
  * @swagger
@@ -97,11 +100,15 @@ router.get('/allUsers', userController.getAllUsers);
  *   get:
  *     summary: Get all users with their orders
  *     tags: [users]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: List of users with their orders
+ *       401:
+ *         description: Unauthorized
  */
-router.get('/orders', userController.getUserOrders);
+router.get('/orders', verifyToken, userController.getUserOrders);
 
 /**
  * @swagger
@@ -109,6 +116,8 @@ router.get('/orders', userController.getUserOrders);
  *   get:
  *     summary: Get user by ID
  *     tags: [users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -121,8 +130,10 @@ router.get('/orders', userController.getUserOrders);
  *         description: User data
  *       404:
  *         description: User not found
+ *       401:
+ *         description: Unauthorized
  */
-router.get('/:id', userController.getOneUser);
+router.get('/:id', verifyToken, userController.getOneUser);
 
 /**
  * @swagger
@@ -130,6 +141,8 @@ router.get('/:id', userController.getOneUser);
  *   put:
  *     summary: Update user by ID
  *     tags: [users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -153,8 +166,10 @@ router.get('/:id', userController.getOneUser);
  *         description: User updated
  *       404:
  *         description: User not found
+ *       401:
+ *         description: Unauthorized
  */
-router.put('/:id', userController.updateUser);
+router.put('/:id', verifyToken, userController.updateUser);
 
 /**
  * @swagger
@@ -162,6 +177,8 @@ router.put('/:id', userController.updateUser);
  *   delete:
  *     summary: Delete user by ID
  *     tags: [users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -174,7 +191,9 @@ router.put('/:id', userController.updateUser);
  *         description: User deleted successfully
  *       404:
  *         description: User not found
+ *       401:
+ *         description: Unauthorized
  */
-router.delete('/:id', userController.deleteUser);
+router.delete('/:id', verifyToken, userController.deleteUser);
 
 module.exports = router;
