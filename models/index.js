@@ -2,6 +2,7 @@ const dbConfig = require('../config/dbConfig.js');
 
 const { Sequelize, DataTypes } = require('sequelize');
 
+
 const sequelize = new Sequelize(
     dbConfig.DB,
     dbConfig.USER,
@@ -40,10 +41,10 @@ db.product = require('./productModel.js')(sequelize, DataTypes);
 db.order = require('./orderModel.js')(sequelize, DataTypes);
 db.orderItems = require('./orderItems.js')(sequelize, DataTypes);
 
-db.sequelize.sync({ force: false })
+/*db.sequelize.sync({ force: false })
     .then(() => {
         console.log('The database has been synchronized successfully.');
-});
+});*/
 
 // N:N order and product
 db.order.belongsToMany(db.product, {

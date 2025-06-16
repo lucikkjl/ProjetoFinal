@@ -1,12 +1,11 @@
-const bcrypt = require('bcryptjs');
 const db = require("../models");
+const User = db.user
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-//create main model
+const secret = process.env.JWT_SECRET
 
-const User = db.user;
-
-//main work
+//add user
 
 const addUser = async (req, res) => {
   try {
@@ -22,7 +21,6 @@ const addUser = async (req, res) => {
 
     console.log(user.get({ plain: true }));
     res.status(201).json({
-      message: "User registered successfully",
       user: user.get({ plain: true })
     });
 
@@ -62,6 +60,7 @@ const loginUser = async (req, res) => {
 }
 
 //middleware to verify jwt token
+
 const verifyToken = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
 
@@ -84,6 +83,7 @@ const verifyToken = (req, res, next) => {
 };
 
 //protected route to get user info
+
 const getUserInfo = async (req, res) => {
   try {
     const user = await User.findOne({ where: { idUser: req.user.idUser } });

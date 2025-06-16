@@ -28,7 +28,3 @@ const orderItems = sequelize.define('orderItems', {
 return orderItems;
 
 }
-
-
-// order (cart) has many products
-//produtcs belongs to many orders
