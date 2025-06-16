@@ -41,13 +41,13 @@ router.get('/getallcategories', categoryController.getAllCategories);
 
 /**
  * @swagger
- * /categories/getcategory/{ID}:
+ * /categories/getcategory/{id}:
  *   get:
  *     summary: Get category by ID
  *     tags: [categories]
  *     parameters:
  *       - in: path
- *         name: ID
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer

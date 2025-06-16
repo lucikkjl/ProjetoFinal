@@ -17,13 +17,13 @@ const router = require('express').Router();
  *             required:
  *               - name
  *               - price
- *               - categoryId
+ *               - idCategory
  *             properties:
  *               name:
  *                 type: string
  *               price:
  *                 type: number
- *               categoryId:
+ *               idCategory:
  *                 type: integer
  *     responses:
  *       201:
@@ -90,7 +90,7 @@ router.get('/getproduct/:id', productController.getOneProduct);
  *                 type: string
  *               price:
  *                 type: number
- *               categoryId:
+ *               idCategory:
  *                 type: integer
  *     responses:
  *       200:

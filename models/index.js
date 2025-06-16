@@ -41,11 +41,6 @@ db.product = require('./productModel.js')(sequelize, DataTypes);
 db.order = require('./orderModel.js')(sequelize, DataTypes);
 db.orderItems = require('./orderItems.js')(sequelize, DataTypes);
 
-/*db.sequelize.sync({ force: false })
-    .then(() => {
-        console.log('The database has been synchronized successfully.');
-});*/
-
 // N:N order and product
 db.order.belongsToMany(db.product, {
   through: db.orderItems,

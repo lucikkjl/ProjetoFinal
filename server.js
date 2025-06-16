@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 
 //server
 
-db.sequelize.sync({ force: false })
+db.sequelize.sync({ force: true }) 
   .then(() => {
     console.log('Database synchronized successfully.')
     app.listen(port, () => {

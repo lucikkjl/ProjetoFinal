@@ -15,9 +15,9 @@ const router = require('express').Router();
  *           schema:
  *             type: object
  *             required:
- *               - userId
+ *               - idUser
  *             properties:
- *               userId:
+ *               idUser:
  *                 type: integer
  *     responses:
  *       201:
@@ -80,7 +80,7 @@ router.get('/getorder/:id', orderController.getOneOrder);
  *           schema:
  *             type: object
  *             properties:
- *               userId:
+ *               idUser:
  *                 type: integer
  *     responses:
  *       200:

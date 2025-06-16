@@ -13,7 +13,9 @@ const orderItems = sequelize.define('orderItems', {
         references: {
             model: 'orders',  
             key: 'idOrder'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
     },
     idProduct: {              
         type: DataTypes.INTEGER,
@@ -21,7 +23,10 @@ const orderItems = sequelize.define('orderItems', {
         references: {
             model: 'products',
             key: 'idProduct'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+        
     }
 });
 
