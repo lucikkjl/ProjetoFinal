@@ -1,6 +1,6 @@
-const categoryController = require('../controllers/categoryController.js');
+const categoryController = require("../controllers/categoryController.js");
 
-const router = require('express').Router();
+const router = require("express").Router();
 
 /**
  * @swagger
@@ -25,7 +25,7 @@ const router = require('express').Router();
  *       400:
  *         description: Invalid data
  */
-router.post('/addcategory', categoryController.addCategory);
+router.post("/addcategory", categoryController.addCategory);
 
 /**
  * @swagger
@@ -37,7 +37,7 @@ router.post('/addcategory', categoryController.addCategory);
  *       200:
  *         description: List of categories
  */
-router.get('/getallcategories', categoryController.getAllCategories);
+router.get("/getallcategories", categoryController.getAllCategories);
 
 /**
  * @swagger
@@ -58,7 +58,7 @@ router.get('/getallcategories', categoryController.getAllCategories);
  *       404:
  *         description: Category not found
  */
-router.get('/getcategory/:id', categoryController.getOneCategory);
+router.get("/getcategory/:id", categoryController.getOneCategory);
 
 /**
  * @swagger
@@ -88,7 +88,7 @@ router.get('/getcategory/:id', categoryController.getOneCategory);
  *       400:
  *         description: Invalid data
  */
-router.put('/updatecategory/:id', categoryController.updateCategory);
+router.put("/updatecategory/:id", categoryController.updateCategory);
 
 /**
  * @swagger
@@ -109,6 +109,6 @@ router.put('/updatecategory/:id', categoryController.updateCategory);
  *       404:
  *         description: Category not found
  */
-router.delete('/deletecategory/:id', categoryController.deleteCategory);
+router.delete("/deletecategory/:id", categoryController.deleteCategory);
 
 module.exports = router;

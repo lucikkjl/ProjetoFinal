@@ -1,12 +1,6 @@
 const db = require("../models");
 
-//create main model
-
 const Category = db.category;
-
-//main work
-
-// create a category
 
 const addCategory = async (req, res) => {
   try {
@@ -15,15 +9,13 @@ const addCategory = async (req, res) => {
     };
 
     const category = await Category.create(info);
-    res.status(201).send(category); // 201 para criação
+    res.status(201).send(category);
     console.log(category.get({ plain: true }));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
   }
 };
-
-// get all categories
 
 const getAllCategories = async (req, res) => {
   try {
@@ -36,8 +28,6 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-//get single category by id
-
 const getOneCategory = async (req, res) => {
   try {
     let id = req.params.id;
@@ -46,7 +36,6 @@ const getOneCategory = async (req, res) => {
     if (!category) {
       return res.status(404).send({ message: "Categoria não encontrada" });
     }
-
     res.status(200).send(category);
     console.log(category.get({ plain: true }));
   } catch (error) {
@@ -54,8 +43,6 @@ const getOneCategory = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-//update category
 
 const updateCategory = async (req, res) => {
   try {
@@ -74,8 +61,6 @@ const updateCategory = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-//delete category
 
 const deleteCategory = async (req, res) => {
   try {
@@ -99,7 +84,7 @@ const getCategoriesWithProducts = async (req, res) => {
       include: [
         {
           model: db.product,
-          as: 'products',
+          as: "products",
         },
       ],
     });
@@ -112,10 +97,10 @@ const getCategoriesWithProducts = async (req, res) => {
 };
 
 module.exports = {
-    addCategory,
-    getAllCategories,
-    getOneCategory,
-    updateCategory,
-    deleteCategory,
-    getCategoriesWithProducts
+  addCategory,
+  getAllCategories,
+  getOneCategory,
+  updateCategory,
+  deleteCategory,
+  getCategoriesWithProducts,
 };

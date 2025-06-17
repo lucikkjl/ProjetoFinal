@@ -8,10 +8,10 @@ const addOrderItem = async (req, res) => {
       idOrder: req.body.idOrder,
       idProduct: req.body.idProduct,
     };
-
     const item = await OrderItem.create(info);
-    res.status(201).send(item);
-    console.log(item.get({ plain: true }));
+    const itemData = item.get({ plain: true });
+    console.log(itemData);
+    res.status(201).json({ idOrderItem: itemData.idOrderItem });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
@@ -22,7 +22,7 @@ const getAllOrderItems = async (req, res) => {
   try {
     let items = await OrderItem.findAll({});
     res.status(200).send(items);
-    items.forEach(i => console.log(i.get({ plain: true })));
+    items.forEach((i) => console.log(i.get({ plain: true })));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
@@ -44,7 +44,9 @@ const getOneOrderItem = async (req, res) => {
 const updateOrderItem = async (req, res) => {
   try {
     let id = req.params.id;
-    const item = await OrderItem.update(req.body, { where: { idOrderItem: id } });
+    const item = await OrderItem.update(req.body, {
+      where: { idOrderItem: id },
+    });
     res.status(200).send(item);
   } catch (error) {
     console.error(error);
@@ -68,5 +70,5 @@ module.exports = {
   getAllOrderItems,
   getOneOrderItem,
   updateOrderItem,
-  deleteOrderItem
+  deleteOrderItem,
 };

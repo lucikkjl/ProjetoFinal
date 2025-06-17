@@ -22,7 +22,7 @@ const getAllOrders = async (req, res) => {
   try {
     let orders = await Order.findAll({});
     res.status(200).send(orders);
-    orders.forEach(o => console.log(o.get({ plain: true })));
+    orders.forEach((o) => console.log(o.get({ plain: true })));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
@@ -68,9 +68,9 @@ const getAllOrdersWithProducts = async (req, res) => {
     const orders = await Order.findAll({
       include: {
         model: Product,
-        as: 'products',
-        through: { attributes: [] }
-      }
+        as: "products",
+        through: { attributes: [] },
+      },
     });
     res.status(200).send(orders);
   } catch (error) {
@@ -85,11 +85,11 @@ const getOrderWithProductsAndUser = async (req, res) => {
     const order = await db.order.findOne({
       where: { idOrder: id },
       include: [
-        { model: db.product, as: 'products', through: { attributes: [] } },
-        { model: db.user, as: 'user' }
-      ]
+        { model: db.product, as: "products", through: { attributes: [] } },
+        { model: db.user, as: "user" },
+      ],
     });
-    if (!order) return res.status(404).send({ message: 'Order not found' });
+    if (!order) return res.status(404).send({ message: "Order not found" });
     res.status(200).send(order);
   } catch (error) {
     console.error(error);
@@ -104,5 +104,5 @@ module.exports = {
   updateOrder,
   deleteOrder,
   getAllOrdersWithProducts,
-  getOrderWithProductsAndUser
+  getOrderWithProductsAndUser,
 };

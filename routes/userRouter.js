@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const userController = require("../controllers/userController");
-const verifyToken = require('../middleware/verifyToken');
+const verifyToken = require("../middleware/verifyToken");
 const router = require("express").Router();
 
 /**
@@ -32,7 +32,7 @@ const router = require("express").Router();
  *       400:
  *         description: Invalid data
  */
-router.post('/addUser', userController.addUser);
+router.post("/addUser", userController.addUser);
 
 /**
  * @swagger
@@ -60,7 +60,7 @@ router.post('/addUser', userController.addUser);
  *       400:
  *         description: Invalid credentials
  */
-router.post('/loginUser', userController.loginUser);
+router.post("/loginUser", userController.loginUser);
 
 /**
  * @swagger
@@ -76,7 +76,7 @@ router.post('/loginUser', userController.loginUser);
  *       401:
  *         description: Unauthorized
  */
-router.get('/me', verifyToken, userController.getUserInfo);
+router.get("/me", verifyToken, userController.getUserInfo);
 
 /**
  * @swagger
@@ -92,7 +92,7 @@ router.get('/me', verifyToken, userController.getUserInfo);
  *       401:
  *         description: Unauthorized
  */
-router.get('/allUsers', verifyToken, userController.getAllUsers);
+router.get("/allUsers", verifyToken, userController.getAllUsers);
 
 /**
  * @swagger
@@ -108,7 +108,7 @@ router.get('/allUsers', verifyToken, userController.getAllUsers);
  *       401:
  *         description: Unauthorized
  */
-router.get('/orders', verifyToken, userController.getUserOrders);
+router.get("/orders", verifyToken, userController.getUserOrders);
 
 /**
  * @swagger
@@ -133,7 +133,7 @@ router.get('/orders', verifyToken, userController.getUserOrders);
  *       401:
  *         description: Unauthorized
  */
-router.get('/:id', verifyToken, userController.getOneUser);
+router.get("/:id", verifyToken, userController.getOneUser);
 
 /**
  * @swagger
@@ -169,7 +169,7 @@ router.get('/:id', verifyToken, userController.getOneUser);
  *       401:
  *         description: Unauthorized
  */
-router.put('/:id', verifyToken, userController.updateUser);
+router.put("/:id", verifyToken, userController.updateUser);
 
 /**
  * @swagger
@@ -194,6 +194,6 @@ router.put('/:id', verifyToken, userController.updateUser);
  *       401:
  *         description: Unauthorized
  */
-router.delete('/:id', verifyToken, userController.deleteUser);
+router.delete("/:id", verifyToken, userController.deleteUser);
 
 module.exports = router;

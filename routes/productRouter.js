@@ -1,6 +1,6 @@
-const productController = require('../controllers/productController.js');
+const productController = require("../controllers/productController.js");
 
-const router = require('express').Router();
+const router = require("express").Router();
 
 /**
  * @swagger
@@ -31,7 +31,7 @@ const router = require('express').Router();
  *       400:
  *         description: Invalid data
  */
-router.post('/addproduct', productController.addProduct);
+router.post("/addproduct", productController.addProduct);
 
 /**
  * @swagger
@@ -43,7 +43,7 @@ router.post('/addproduct', productController.addProduct);
  *       200:
  *         description: List of products
  */
-router.get('/getallproducts', productController.getAllProducts);
+router.get("/getallproducts", productController.getAllProducts);
 
 /**
  * @swagger
@@ -64,7 +64,7 @@ router.get('/getallproducts', productController.getAllProducts);
  *       404:
  *         description: Product not found
  */
-router.get('/getproduct/:id', productController.getOneProduct);
+router.get("/getproduct/:id", productController.getOneProduct);
 
 /**
  * @swagger
@@ -98,7 +98,7 @@ router.get('/getproduct/:id', productController.getOneProduct);
  *       400:
  *         description: Invalid data
  */
-router.put('/updateproduct/:id', productController.updateProduct);
+router.put("/updateproduct/:id", productController.updateProduct);
 
 /**
  * @swagger
@@ -119,6 +119,6 @@ router.put('/updateproduct/:id', productController.updateProduct);
  *       404:
  *         description: Product not found
  */
-router.delete('/deleteproduct/:id', productController.deleteProduct);
+router.delete("/deleteproduct/:id", productController.deleteProduct);
 
 module.exports = router;

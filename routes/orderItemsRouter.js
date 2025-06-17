@@ -1,6 +1,6 @@
-const orderItemsController = require('../controllers/orderItemsController.js');
+const orderItemsController = require("../controllers/orderItemsController.js");
 
-const router = require('express').Router();
+const router = require("express").Router();
 
 /**
  * @swagger
@@ -30,7 +30,7 @@ const router = require('express').Router();
  *       400:
  *         description: Invalid data
  */
-router.post('/addorderitem', orderItemsController.addOrderItem);
+router.post("/addorderitem", orderItemsController.addOrderItem);
 
 /**
  * @swagger
@@ -42,7 +42,7 @@ router.post('/addorderitem', orderItemsController.addOrderItem);
  *       200:
  *         description: List of all order items
  */
-router.get('/getallorderitems', orderItemsController.getAllOrderItems);
+router.get("/getallorderitems", orderItemsController.getAllOrderItems);
 
 /**
  * @swagger
@@ -63,7 +63,7 @@ router.get('/getallorderitems', orderItemsController.getAllOrderItems);
  *       404:
  *         description: Order item not found
  */
-router.get('/getoneorderitem/:id', orderItemsController.getOneOrderItem);
+router.get("/getoneorderitem/:id", orderItemsController.getOneOrderItem);
 
 /**
  * @swagger
@@ -95,7 +95,7 @@ router.get('/getoneorderitem/:id', orderItemsController.getOneOrderItem);
  *       400:
  *         description: Invalid data
  */
-router.put('/updateorderitem/:id', orderItemsController.updateOrderItem);
+router.put("/updateorderitem/:id", orderItemsController.updateOrderItem);
 
 /**
  * @swagger
@@ -116,6 +116,6 @@ router.put('/updateorderitem/:id', orderItemsController.updateOrderItem);
  *       404:
  *         description: Order item not found
  */
-router.delete('/deleteorderitem/:id', orderItemsController.deleteOrderItem);
+router.delete("/deleteorderitem/:id", orderItemsController.deleteOrderItem);
 
 module.exports = router;
